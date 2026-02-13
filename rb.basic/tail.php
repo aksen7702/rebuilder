@@ -1,0 +1,696 @@
+<?php
+if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+
+if (G5_IS_MOBILE) {
+    include_once(G5_THEME_MOBILE_PATH.'/tail.php');
+    return;
+}
+
+if(G5_COMMUNITY_USE === false) {
+    include_once(G5_THEME_SHOP_PATH.'/shop.tail.php');
+    return;
+}
+?>
+<?php if (!defined("_INDEX_")) { ?>
+    <?php if(isset($bo_table) && $bo_table) { ?>
+    <div class="rb_bo_btm flex_box rb_sub_module" data-layout="rb_bo_btm_<?php echo $bo_table ?>"></div>
+    <?php } ?>
+    <?php if(isset($co_id) && $co_id) { ?>
+    <div class="rb_co flex_box" data-layout="rb_co_btm_<?php echo $co_id ?>"></div>
+    <?php } ?>
+    <?php if(isset($fr_id) && $fr_id) { ?>
+    <div class="rb_fr_btm flex_box rb_sub_module" data-layout="rb_fr_btm_<?php echo $fr_id ?>"></div>
+    <?php } ?>
+<?php } ?>
+
+<?php if (!defined('_INDEX_') && !$sidebar_hidden) { ?>
+   
+    <?php if (!empty($side_float)) { ?>
+    </div>
+    <?php } ?>
+    <?php if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "left" || isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "right") { ?>
+    <div id="rb_sidemenu" class="rb_sidemenu rb_sidemenu_<?php echo isset($rb_core['sidemenu']) ? $rb_core['sidemenu'] : ''; ?> <?php if (isset($rb_core['sidemenu_hide']) && $rb_core['sidemenu_hide'] == "1") { ?>pc<?php } ?>" style="width:<?php echo isset($rb_core['sidemenu_width']) ? $rb_core['sidemenu_width'] : '200'; ?>px; <?php if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "left") { ?>padding-right:<?php echo isset($rb_core['sidemenu_padding']) ? $rb_core['sidemenu_padding'] : '0'; ?>px;<?php } else if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "right") { ?>padding-left:<?php echo isset($rb_core['sidemenu_padding']) ? $rb_core['sidemenu_padding'] : '0'; ?>px;<?php } ?>"><div class="flex_box" data-layout="rb_sidemenu"></div></div>
+    <?php } ?>
+
+    <div class="cb"></div>
+
+<?php } ?>
+
+</section>
+</div>
+
+
+<?php 
+
+    if (isset($rb_core['layout_ft']) && $rb_core['layout_ft'] == "") {
+        echo "<div class='no_data' style='padding:30px 0 !important; margin-top:0px; border:0px !important; background-color:#f9f9f9;'><span class='no_data_section_ul1 font-B color-000'>선택된 푸터 레이아웃이 없습니다.</span><br>환경설정 패널에서 먼저 푸터 레이아웃을 설정해주세요.</div>";
+    } else if (isset($rb_core['layout_ft'])) { 
+        // 레이아웃 인클루드
+        include_once(G5_THEME_PATH . '/rb.layout_ft/' . $rb_core['layout_ft'] . '/footer.php'); 
+    } else {
+        echo "<div class='no_data' style='padding:30px 0 !important; margin-top:0px; border:0px !important; background-color:#f9f9f9;'><span class='no_data_section_ul1 font-B color-000'>푸터 레이아웃 설정이 올바르지 않습니다.</span><br>환경설정 패널에서 먼저 푸터 레이아웃을 설정해주세요.</div>";
+    }
+
+    ?>
+
+
+
+
+<!-- 전체메뉴 { -->
+<nav id="cbp-hrmenu-btm" class="cbp-hrmenu cbp-hrmenu-btm mobile">
+
+   <div class="rb_btm_search_pn">
+       <ul class="fixed_rb_btm_s">
+           <form name="fsearchbox2" method="get" action="<?php echo G5_BBS_URL ?>/search.php" onsubmit="return fsearchbox_submit2(this);">
+           <input type="hidden" name="sfl" value="wr_subject||wr_content">
+
+           <li class="rb_btm_search_pn_li1">
+               <button type="button" class="rb_bs_back_btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_75_6)">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.29303 12.707C8.10556 12.5195 8.00024 12.2652 8.00024 12C8.00024 11.7348 8.10556 11.4805 8.29303 11.293L13.95 5.63601C14.0423 5.5405 14.1526 5.46431 14.2746 5.41191C14.3966 5.3595 14.5278 5.33191 14.6606 5.33076C14.7934 5.3296 14.9251 5.3549 15.048 5.40519C15.1709 5.45547 15.2825 5.52972 15.3764 5.62361C15.4703 5.71751 15.5446 5.82916 15.5949 5.95205C15.6451 6.07495 15.6704 6.20663 15.6693 6.33941C15.6681 6.47219 15.6405 6.60341 15.5881 6.72541C15.5357 6.84742 15.4595 6.95776 15.364 7.05001L10.414 12L15.364 16.95C15.5462 17.1386 15.647 17.3912 15.6447 17.6534C15.6424 17.9156 15.5373 18.1664 15.3518 18.3518C15.1664 18.5372 14.9156 18.6424 14.6534 18.6447C14.3912 18.647 14.1386 18.5462 13.95 18.364L8.29303 12.707Z" fill="#09244B"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_75_6">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg>
+               </button>
+           </li>
+           <li class="rb_btm_search_pn_li2">
+               <input type="text" name="stx" maxlength="20" class="rb_bs_inp font-B" placeholder="검색어를 입력하세요." required>
+           </li>
+           <li class="rb_btm_search_pn_li3">
+                <button type="submit" class="rb_bs_se_btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_75_10)">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2C9.1446 2.00012 7.80887 2.32436 6.60427 2.94569C5.39966 3.56702 4.3611 4.46742 3.57525 5.57175C2.78939 6.67609 2.27902 7.95235 2.08672 9.29404C1.89442 10.6357 2.02576 12.004 2.46979 13.2846C2.91382 14.5652 3.65766 15.7211 4.63925 16.6557C5.62084 17.5904 6.81171 18.2768 8.11252 18.6576C9.41333 19.0384 10.7864 19.1026 12.117 18.8449C13.4477 18.5872 14.6975 18.015 15.762 17.176L19.414 20.828C19.6026 21.0102 19.8552 21.111 20.1174 21.1087C20.3796 21.1064 20.6304 21.0012 20.8158 20.8158C21.0012 20.6304 21.1064 20.3796 21.1087 20.1174C21.111 19.8552 21.0102 19.6026 20.828 19.414L17.176 15.762C18.164 14.5086 18.7792 13.0024 18.9511 11.4157C19.123 9.82905 18.8448 8.22602 18.1482 6.79009C17.4517 5.35417 16.3649 4.14336 15.0123 3.29623C13.6597 2.44911 12.096 1.99989 10.5 2ZM4.00001 10.5C4.00001 8.77609 4.68483 7.12279 5.90382 5.90381C7.1228 4.68482 8.7761 4 10.5 4C12.2239 4 13.8772 4.68482 15.0962 5.90381C16.3152 7.12279 17 8.77609 17 10.5C17 12.2239 16.3152 13.8772 15.0962 15.0962C13.8772 16.3152 12.2239 17 10.5 17C8.7761 17 7.1228 16.3152 5.90382 15.0962C4.68483 13.8772 4.00001 12.2239 4.00001 10.5Z" fill="#09244B"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_75_10">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg>
+                </button>
+           </li>
+           </form>
+           
+           <script>
+               function fsearchbox_submit2(f) //검색
+               {
+                   var stx = f.stx.value.trim();
+                   if (stx.length < 2) {
+                       alert("검색어는 두글자 이상 입력해주세요.");
+                       f.stx.select();
+                       f.stx.focus();
+                       return false;
+                   }
+
+                   // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.
+                   var cnt = 0;
+                   for (var i = 0; i < stx.length; i++) {
+                       if (stx.charAt(i) == ' ')
+                           cnt++;
+                   }
+
+                   if (cnt > 1) {
+                       alert("빠른 검색을 위해 공백은 한번만 입력할 수 있어요.");
+                       f.stx.select();
+                       f.stx.focus();
+                       return false;
+                   }
+                   f.stx.value = stx;
+
+                   return true;
+               }
+
+           </script>
+           
+       </ul>
+       <br><br><br><br>
+       <ul class="rb_btm_skey">
+           <h6 class="font-B">인기 검색어</h6>
+           <li>
+           <?php echo popular("theme/rb.basic", 10); // 인기검색어  ?>
+           </li>
+       </ul>
+       
+       
+       <ul class="rb_btm_sbbs">
+            <h6 class="font-B">요즘 뜨는 글</h6>
+
+            <?php
+            $thumb_width = 200;
+            $thumb_height = 200;
+
+            $limit_free = 5;
+
+            // // 1) 후보 풀(최근 N개)만 g5_board_new에서 가져오기 (부하 최소화 핵심)
+            $candidate_limit = 100;
+
+            $sql_cand = "
+                SELECT
+                    n.bo_table,
+                    n.wr_id,
+                    n.bn_id,
+                    b.bo_subject
+                FROM {$g5['board_new_table']} n
+                INNER JOIN {$g5['board_table']} b
+                    ON b.bo_table = n.bo_table
+                WHERE n.wr_parent = n.wr_id
+                  AND b.bo_use_search = 1
+                ORDER BY n.bn_id DESC
+                LIMIT {$candidate_limit}
+            ";
+            $res_cand = sql_query($sql_cand);
+
+            // // 2) 후보 글들에 대해서만 write_table 단건조회로 점수 계산
+            $hot_map = array(); // // key: bo_table|wr_id
+
+            for ($i=0; $cand = sql_fetch_array($res_cand); $i++) {
+                $bo_table = (string)$cand['bo_table'];
+                $wr_id    = (int)$cand['wr_id'];
+
+                if ($bo_table === '' || $wr_id <= 0) continue;
+
+                $key = $bo_table.'|'.$wr_id;
+                if (isset($hot_map[$key])) continue;
+
+                $write_table = $g5['write_prefix'].$bo_table;
+
+                // // 단건조회 (필요한 컬럼만)
+                $row = sql_fetch("
+                    SELECT
+                        wr_id, wr_subject, wr_name, wr_datetime, wr_comment, wr_good, wr_hit, ca_name
+                    FROM {$write_table}
+                    WHERE wr_id = '{$wr_id}'
+                      AND wr_is_comment = 0
+                    LIMIT 1
+                ");
+                if (!$row || empty($row['wr_id'])) continue;
+
+                $comment = (int)($row['wr_comment'] ?? 0);
+                $good    = (int)($row['wr_good'] ?? 0);
+                $hit    = (int)($row['wr_hit'] ?? 0);
+
+                // // 점수 (기존 로직 유지)
+                $score = ($hit * 1) + ($comment * 2) + ($good * 3);
+
+                $hot_map[$key] = array(
+                    'bo_table'    => $bo_table,
+                    'bo_subject'  => (string)($cand['bo_subject'] ?? ''),
+                    'wr_id'       => (int)$row['wr_id'],
+                    'wr_subject'  => (string)($row['wr_subject'] ?? ''),
+                    'wr_name'     => (string)($row['wr_name'] ?? ''),
+                    'wr_datetime' => (string)($row['wr_datetime'] ?? ''),
+                    'wr_comment'  => $comment,
+                    'wr_good'     => $good,
+                    'ca_name'     => (string)($row['ca_name'] ?? ''),
+                    'rb_score'    => (int)$score
+                );
+            }
+
+            // // 3) 점수 높은 순으로 정렬 후 TOP 5만
+            $hot_list = array_values($hot_map);
+
+            usort($hot_list, function($a, $b){
+                $sa = (int)($a['rb_score'] ?? 0);
+                $sb = (int)($b['rb_score'] ?? 0);
+                if ($sa === $sb) {
+                    $ida = (int)($a['wr_id'] ?? 0);
+                    $idb = (int)($b['wr_id'] ?? 0);
+                    return ($idb <=> $ida);
+                }
+                return ($sb <=> $sa);
+            });
+
+            if (count($hot_list) > $limit_free) {
+                $hot_list = array_slice($hot_list, 0, $limit_free);
+            }
+            ?>
+
+
+        
+            <div class="hub_latest">
+
+                <div class="rb_swiper" 
+                    id="rb_swiper_hub_2" 
+                    data-pc-w="1" 
+                    data-pc-h="5" 
+                    data-mo-w="1" 
+                    data-mo-h="5" 
+                    data-pc-gap="30" 
+                    data-mo-gap="20" 
+                    data-autoplay="0" 
+                    data-autoplay-time="0" 
+                    data-pc-swap="0" 
+                    data-mo-swap="0" 
+                >
+
+                    <div class="rb_swiper_inner">
+                        <div class="rb-swiper-wrapper swiper-wrapper">
+
+                            <?php
+                            for ($i=0; $i < count($hot_list); $i++) {
+                                $rows = $hot_list[$i];
+
+                                $bo_table = (string)$rows['bo_table'];
+                                $hrefs = get_pretty_url($bo_table, (int)$rows['wr_id']);
+
+                                $thumb = get_list_thumbnail($bo_table, (int)$rows['wr_id'], $thumb_width, $thumb_height, false, true);
+                                if (!empty($thumb['src'])) {
+                                    $img = $thumb['src'];
+                                    $alt = $thumb['alt'] ?? '';
+                                } else {
+                                    $img = G5_THEME_URL.'/rb.img/no_image.png';
+                                    $alt = '이미지가 없습니다.';
+                                }
+                                $img_content = '<img src="'.$img.'" alt="'.$alt.'" class="skin_list_image">';
+
+                                $ca_name   = (string)($rows['ca_name'] ?? '');
+                                $bo_subject = (string)($rows['bo_subject'] ?? '');
+                            ?>
+
+                            <!-- 카드 -->
+                              <div class="rb_swiper_list rb_swiper_hub_1_wrap rb_swiper_hub_top_skin">
+                                <!-- 이 안의 ul에도 li 없던 문제는 유지하되, 구조 문제 있으면 li로 감싸세요 -->
+                                <ul class="rb_swiper_hub_1_wrap_ul2">
+                                  <li><a href="<?php echo $hrefs ?>"><?php echo run_replace('thumb_image_tag', $img_content, $thumb); ?></a></li>
+                                </ul>
+
+                                <ul class="rb_swiper_hub_1_wrap_ul1">
+                                  <li class="rb_swiper_hub_1_wrap_i">
+
+                                    <span><?php echo $rows['bo_subject']; ?>　<?php echo $ca_name; ?></span>
+                                    
+                                  </li>
+
+                                  <li class="rb_swiper_hub_1_wrap_t cut2 mt-10">
+                                    <a href="<?php echo $hrefs ?>" class="font-16"><?php echo $rows['wr_subject']; ?> <?php if($rows['wr_comment']) { ?><span class="font-B main_color">+<?php echo number_format($rows['wr_comment']); ?></span><?php } ?></a>
+                                  </li>
+
+                                  <li class="rb_swiper_hub_1_wrap_i mt-5">
+                                    <span class="font-R font-12 color-999"><?php echo $rows['wr_name']; ?>　<?php echo date('Y-m-d', strtotime((string)$rows['wr_datetime'])); ?></span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <?php } // for ?>
+
+                            </div>
+
+                            <?php if (count($hot_list) == 0) { ?>
+                              <div>
+                                <ul>
+                                  <li class="no_data">게시물이 없어요.</li>
+                                </ul>
+                              </div>
+                            <?php } ?>
+                          </div>
+
+
+                </div>
+
+
+            </div>
+        
+
+           
+       </ul>
+   </div>
+   
+   <button type="button" id="m_gnb_close_btn" class="mobile">
+        <img src="<?php echo G5_URL ?>/rb/rb.config/image/icon_close.svg">
+    </button>
+
+    
+    <button type="button" class="rb_btm_search_btn">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.49928 1.91687e-08C7.14387 0.000115492 5.80814 0.324364 4.60353 0.945694C3.39893 1.56702 2.36037 2.46742 1.57451 3.57175C0.788656 4.67609 0.278287 5.95235 0.0859852 7.29404C-0.106316 8.63574 0.0250263 10.004 0.469055 11.2846C0.913084 12.5652 1.65692 13.7211 2.63851 14.6557C3.6201 15.5904 4.81098 16.2768 6.11179 16.6576C7.4126 17.0384 8.78562 17.1026 10.1163 16.8449C11.447 16.5872 12.6967 16.015 13.7613 15.176L17.4133 18.828C17.6019 19.0102 17.8545 19.111 18.1167 19.1087C18.3789 19.1064 18.6297 19.0012 18.8151 18.8158C19.0005 18.6304 19.1057 18.3796 19.108 18.1174C19.1102 17.8552 19.0094 17.6026 18.8273 17.414L15.1753 13.762C16.1633 12.5086 16.7784 11.0024 16.9504 9.41573C17.1223 7.82905 16.8441 6.22602 16.1475 4.79009C15.4509 3.35417 14.3642 2.14336 13.0116 1.29623C11.659 0.449106 10.0952 -0.000107143 8.49928 1.91687e-08ZM1.99928 8.5C1.99928 6.77609 2.6841 5.12279 3.90308 3.90381C5.12207 2.68482 6.77537 2 8.49928 2C10.2232 2 11.8765 2.68482 13.0955 3.90381C14.3145 5.12279 14.9993 6.77609 14.9993 8.5C14.9993 10.2239 14.3145 11.8772 13.0955 13.0962C11.8765 14.3152 10.2232 15 8.49928 15C6.77537 15 5.12207 14.3152 3.90308 13.0962C2.6841 11.8772 1.99928 10.2239 1.99928 8.5Z" fill="#09244B"></path>
+        </svg>
+    </button>
+    
+    <script>
+    $('.ser_label').click(function() {
+        var dataKey = $(this).attr('data-key');
+        $('.rb_bs_inp').val(dataKey);
+    });
+    document.addEventListener('click', function (ev) {
+        // 검색 버튼 -> 열기
+        var openBtn = ev.target.closest('.rb_btm_search_btn');
+        if (openBtn) {
+            var pn1 = document.querySelector('.rb_btm_search_pn');
+            if (pn1) pn1.classList.add('open');
+            return;
+        }
+
+        // 뒤로 버튼 -> 닫기
+        var backBtn = ev.target.closest('.rb_bs_back_btn');
+        if (backBtn) {
+            var pn2 = document.querySelector('.rb_btm_search_pn');
+            if (pn2) pn2.classList.remove('open');
+            return;
+        }
+    });
+    </script>
+    
+    <script>
+        $(document).ready(function() {
+            $('#m_gnb_close_btn').click(function() {
+                $('#cbp-hrmenu-btm').removeClass('active');
+                $('#m_gnb_close_btn').removeClass('active');
+                $('main').removeClass('moves');
+                $('header').removeClass('moves');
+            });
+        });
+    </script>
+
+
+    <div class="user_prof_bg">
+        <?php if($is_member) { ?>
+        <li class="user_prof_bg_info font-B"><?php echo $member['mb_nick'] ?></li>
+        <li class="user_prof_bg_info font-B"><span><?php echo $member['mb_level'] ?> Lv</span> <a href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank" class="win_point font-B"><span><?php echo number_format($member['mb_point']); ?> P</span></a></li>
+        <?php } else { ?>
+        <li class="user_prof_bg_info font-B">Guest</li>
+        <?php } ?>
+    </div>
+    <div class="user_prof">
+        <?php if($is_member) { ?>
+        <a href="<?php echo G5_BBS_URL ?>/member_confirm.php?url=<?php echo G5_BBS_URL ?>/register_form.php" class="font-B"><?php echo get_member_profile_img($member['mb_id']); ?></a>
+        <?php } else { ?>
+        <?php echo get_member_profile_img($member['mb_id']); ?>
+        <?php } ?>
+    </div>
+    <div class="user_prof_btns">
+        <li class="">
+            <?php if($is_member) { ?>
+            <button type="button" alt="로그아웃" class="btn_round" onclick="location.href='<?php echo G5_BBS_URL ?>/logout.php';">로그아웃</button>
+            <button type="button" alt="마이페이지" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_URL; ?>/rb/home.php?mb_id=<?php echo $member['mb_id']; ?>';">My</button>
+            <?php } else { ?>
+            <button type="button" alt="로그인" class="btn_round" onclick="location.href='<?php echo G5_BBS_URL ?>/login.php?url=<?php echo urlencode(getCurrentUrl()); ?>';">로그인</button>
+            <button type="button" alt="회원가입" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_BBS_URL ?>/register.php';">회원가입</button>
+            <?php } ?>
+        </li>
+    </div>
+
+
+
+    <ul>
+    <?php
+    if(IS_MOBILE()) {
+        $menu_datas = rb_menu_db_3d(1, true);
+    } else {
+        $menu_datas = rb_menu_db_3d(0, true);
+    }
+
+    $gnb_zindex = 999;
+    $i = 0;
+
+    foreach ($menu_datas as $row) {
+        if (empty($row)) continue;
+
+        // 1차 메뉴 권한 체크
+        if (!$is_admin && isset($row['me_level']) && $row['me_level'] > 0) {
+            if (isset($row['me_level_opt']) && $row['me_level_opt'] == 2) {
+                if ($row['me_level'] != $member['mb_level']) continue;
+            } else {
+                if ($row['me_level'] > $member['mb_level']) continue;
+            }
+        }
+
+        $has_sub2 = (isset($row['sub']) && is_array($row['sub']) && count($row['sub']) > 0);
+        $add_arr = $has_sub2 ? 'add_arr_svg' : '';
+        $add_arr_btn = $has_sub2 ? '<button type="button" class="add_arr_btn" aria-label="서브메뉴 열기"></button>' : '';
+    ?>
+        <li class="<?php echo $add_arr; ?>">
+            <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="font-B"><?php echo $row['me_name']; ?></a>
+            <?php echo $add_arr_btn; ?>
+
+            <?php
+            $k = 0;
+            foreach ((array)$row['sub'] as $row2) {
+                if (empty($row2)) continue;
+
+                // 2차 메뉴 권한 체크
+                if (!$is_admin && isset($row2['me_level']) && $row2['me_level'] > 0) {
+                    if (isset($row2['me_level_opt']) && $row2['me_level_opt'] == 2) {
+                        if ($row2['me_level'] != $member['mb_level']) continue;
+                    } else {
+                        if ($row2['me_level'] > $member['mb_level']) continue;
+                    }
+                }
+
+                if ($k == 0) {
+                    echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><ul>' . PHP_EOL;
+                }
+
+                // // 2차 li 시작
+                echo '<li class="rb-btm-2d">';
+
+                echo '<a href="'.$row2['me_link'].'" target="_'.$row2['me_target'].'">'.$row2['me_name'].'</a>';
+
+                // // 3차 출력(있으면)
+                $j = 0;
+                if (!empty($row2['sub']) && is_array($row2['sub'])) {
+                    foreach ((array)$row2['sub'] as $row3) {
+                        if (empty($row3)) continue;
+
+                        // 3차 메뉴 권한 체크
+                        if (!$is_admin && isset($row3['me_level']) && $row3['me_level'] > 0) {
+                            if (isset($row3['me_level_opt']) && $row3['me_level_opt'] == 2) {
+                                if ($row3['me_level'] != $member['mb_level']) continue;
+                            } else {
+                                if ($row3['me_level'] > $member['mb_level']) continue;
+                            }
+                        }
+
+                        if ($j == 0) {
+                            // // 3차 토글 버튼(2차 클릭 시 열리게)
+                            echo '<button type="button" class="rb-btm-3d-toggle" aria-label="3차 메뉴 열기"></button>';
+                            echo '<ul class="cbp-hrsub-3">' . PHP_EOL;
+                        }
+
+                        echo '<li><a href="'.$row3['me_link'].'" target="_'.$row3['me_target'].'">'.$row3['me_name'].'</a></li>' . PHP_EOL;
+                        $j++;
+                    }
+
+                    if ($j > 0) {
+                        echo '</ul>' . PHP_EOL;
+                    }
+                }
+
+                echo '</li>' . PHP_EOL; // // 2차 li 끝
+                $k++;
+            }
+
+            if ($k > 0) {
+                echo '</ul></div></div></div>' . PHP_EOL;
+            }
+            ?>
+        </li>
+    <?php
+        $i++;
+    }
+    ?>
+    </ul>
+
+
+
+</nav>
+
+<script>
+(function () {
+    // // 캡처 단계에서 3차 토글 먼저 처리 (기존 btm 스크립트 간섭 차단)
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('#cbp-hrmenu-btm .rb-btm-3d-toggle');
+        if (!btn) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        var li = btn.closest('li.rb-btm-2d') || btn.closest('li');
+        if (!li) return;
+
+        var panel = li.querySelector(':scope > .cbp-hrsub-3') || li.querySelector('.cbp-hrsub-3');
+        if (!panel) return;
+
+        // // 토글
+        var isOpen = panel.style.display === 'block' || panel.offsetParent !== null;
+        if (isOpen) {
+            panel.style.display = 'none';
+            li.classList.remove('rb-3d-open');
+        } else {
+            // // 형제 3차 닫기(원하면 제거 가능)
+            var sibs = li.parentElement ? li.parentElement.children : [];
+            for (var i = 0; i < sibs.length; i++) {
+                sibs[i].classList.remove('rb-3d-open');
+                var p = sibs[i].querySelector('.cbp-hrsub-3');
+                if (p) p.style.display = 'none';
+            }
+
+            panel.style.display = 'block';
+            li.classList.add('rb-3d-open');
+        }
+    }, true); // true = capture
+})();
+</script>
+
+
+<!-- } -->
+
+
+<script src="<?php echo G5_THEME_URL ?>/rb.js/cbpHorizontalMenu.min.js"></script>
+<script>
+    $(function() {
+        cbpHorizontalMenu.init();
+        cbpHorizontalMenu_btm.init();
+    });
+</script>
+<!-- } -->
+
+<!-- 캘린더 옵션 { -->
+<script>
+    $.datepicker.setDefaults({
+        closeText: "닫기",
+        prevText: "이전달",
+        nextText: "다음달",
+        currentText: "오늘",
+        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
+            "7월", "8월", "9월", "10월", "11월", "12월"
+        ],
+        monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
+            "7월", "8월", "9월", "10월", "11월", "12월"
+        ],
+        dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+        dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+        dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+        weekHeader: "주",
+        dateFormat: "yy-mm-dd",
+        firstDay: 0,
+        isRTL: false,
+        showMonthAfterYear: true,
+        yearSuffix: "년"
+    })
+
+    $(".datepicker_inp").datepicker({
+        //minDate: 0
+    })
+</script>
+
+<?php if($bo_table && $wr_id) { // 댓글 수정모드일때 높이값 갱신?>
+<script>
+    (function() {
+        if (!window.comment_box || window.comment_box.__patched) return;
+
+        var _orig = window.comment_box;
+
+        function kick() {
+            var ta = document.getElementById('wr_content');
+            if (!ta) return;
+            if (window.jQuery) $('#wr_content').trigger('input');
+            else {
+                ta.style.minHeight = '150px';
+                ta.style.height = 'auto';
+                ta.style.height = ta.scrollHeight + 'px';
+            }
+        }
+
+        window.comment_box = function() {
+            var ret = _orig.apply(this, arguments);
+            // 레이아웃 반영 후 두 번 정도 태워줌
+            requestAnimationFrame(kick);
+            setTimeout(kick, 0);
+            return ret;
+        };
+        window.comment_box.__patched = true;
+    })();
+</script>
+<script>
+(function () {
+  // 1) check_byte를 원형 보존 + 최근 target만 기록 (동작은 100% 동일)
+  if (typeof window.check_byte === 'function' && !window.check_byte.__rb_wrapped) {
+    var __orig_check_byte = window.check_byte;
+    window.__rb_last_cb_target = null;
+
+    window.check_byte = function (content, target) {
+      window.__rb_last_cb_target = target || window.__rb_last_cb_target;
+      return __orig_check_byte.apply(this, arguments);
+    };
+    window.check_byte.__rb_wrapped = true;
+    window.check_byte.__rb_orig = __orig_check_byte;
+  }
+
+  // 2) comment_box 원본 보존 후, 실행 직후 "한 번만" 재계산
+  if (typeof window.comment_box === 'function' && !window.comment_box.__rb_patched) {
+    var _orig_comment_box = window.comment_box;
+
+    window.comment_box = function () {
+      var ret = _orig_comment_box.apply(this, arguments);
+
+      setTimeout(function () {
+        // 최근에 페이지가 사용한 target을 우선 사용
+        var target = window.__rb_last_cb_target
+                  || (document.getElementById('char_count') ? 'char_count' : null)
+                  || (document.getElementById('char_cnt')   ? 'char_cnt'   : null);
+
+        if (typeof window.check_byte === 'function' && target) {
+          // 원래 출력 형식(N 글자 등)을 그대로 유지하려고 원본 check_byte를 호출
+          var fn = window.check_byte.__rb_orig || window.check_byte;
+          fn('wr_content', target);
+        }
+      }, 0);
+
+      return ret;
+    };
+    window.comment_box.__rb_patched = true;
+  }
+})();
+</script>
+
+<?php } ?>
+
+<link rel="stylesheet" href="<?php echo G5_THEME_URL ?>/rb.css/datepicker.css" />
+<!-- } -->
+
+<?php
+    //리빌드세팅
+    if($is_admin) {
+        include_once(G5_PATH.'/rb/rb.config/right.php'); //환경설정
+    }
+         
+    // HOOK 추가, (tail.php 가 로드되는 페이지에서만 / 쪽지, 로그인 등의 모듈 페이지에서는 실행 되지않게 하기위함.)
+    // 관련 HOOK : add_event('tail_sub', 'aaa');
+    $rb_hook_tail = "true";
+
+?>
+
+
+<?php
+if(G5_DEVICE_BUTTON_DISPLAY && !G5_IS_MOBILE) { ?>
+<?php
+}
+
+if ($config['cf_analytics']) {
+    echo $config['cf_analytics'];
+}
+
+if(defined('_INDEX_') || isset($_GET['gr_id']) && $_GET['gr_id'] || isset($co_id) && $co_id) {
+    if ($rb_aos_exists) { 
+        echo '<script>AOS.init();</script>';
+    }
+}
+?>
+
+<!-- } 하단 끝 -->
+
+<script>
+    $(function() {
+        // 폰트 리사이즈 쿠키있으면 실행
+        font_resize("container", get_cookie("ck_font_resize_rmv_class"), get_cookie("ck_font_resize_add_class"));
+    });
+
+</script>
+
+<?php
+include_once(G5_THEME_PATH."/tail.sub.php");
